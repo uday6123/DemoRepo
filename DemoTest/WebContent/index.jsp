@@ -12,9 +12,15 @@ asdasd
 we are one1
 here i am 
 assad
+<<<<<<< HEAD
 1233
 masadoi
 llkma
+=======
+1233
+masadoi
+llkma
+>>>>>>> refs/remotes/origin/master
 Me3duri
 papa
 masadipapa
