@@ -15,7 +15,10 @@ assad
 1233
 masadoi
 llkma
+<<<<<<< HEAD
 Me3duri
+=======
+>>>>>>> branch 'master' of https://github.com/uday6123/DemoRepo.git
 papa
 </body>
 </html>
