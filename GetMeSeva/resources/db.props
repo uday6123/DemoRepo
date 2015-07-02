@@ -1,0 +1,6 @@
+MYSQL_DB_HOST=localhost
+MYSQL_DB_PORT=3306
+MYSQL_DB_NAME=REQUESTS
+MYSQL_DB_USER=getmeseva
+MYSQL_DB_PWD=getmeseva123
+#http://localhost:3306/requests/

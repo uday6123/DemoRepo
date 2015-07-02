@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-aop-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-aspects-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-beans-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-build-src-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-context-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-core-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-expression-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-framework-bom-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-instrument-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-jdbc-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-jms-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-messaging-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-orm-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-oxm-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-test-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-tx-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-web-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-webmvc-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-webmvc-portlet-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Spring-4/spring-websocket-4.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/Servlet/javax.servlet-3.0.jar"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/misc/jstl-1.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="F:/GetItOnline/MyJars/MySQL/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
