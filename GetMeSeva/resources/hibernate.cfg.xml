@@ -13,15 +13,16 @@
 
    <!-- Assume test is the database name -->
    <property name="hibernate.connection.url">
-      jdbc:mysql://10.103.10.51:3306/userinfo
+      jdbc:mysql://localhost:3306/REQUESTS
    </property>
    <property name="hibernate.connection.username">
-      root
+      getmeseva
    </property>
-   <property name="hibernate.connection.password"></property>
+   <property name="hibernate.connection.password">getmeseva123</property>
 
    <!-- List of XML mapping files -->
-   <mapping resource="employee.hbm.xml"/>
-
+   <mapping class="com.getmeseva.db.Employee"/>
+	<mapping class="com.getmeseva.db.Student"/>
+		
 </session-factory>
 </hibernate-configuration>

@@ -1,9 +1,16 @@
 package com.getmeseva.db;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Emp")
 public class Employee {
 
 	public Employee(){}
 	
+	@Id
 	public int id;
 	public String fname;
 	public String lname;
