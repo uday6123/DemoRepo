@@ -45,9 +45,9 @@
 									</textarea>
 								</div>
 							</div>								
-							<input type="hidden" name="dept" value="${selectedDept}">
+							<input type="hidden" name="dept" value="${dept}">
 							<input type="hidden" name="state" value="${selectedState}">
-							<input type="hidden" name="dist" value="${selectedDist}">
+							<input type="hidden" name="dist" value="${dist}">
 
 							<button type="submit" class="btn btn-default">Register Complaint</button>
 						</form>

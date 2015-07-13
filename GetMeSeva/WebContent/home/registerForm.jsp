@@ -18,9 +18,9 @@
 <form class="form-horizontal" role="form" method="post" action="/GetMeSeva/showComplaintForm.do">
 							
 							<div class="form-group">
-								<label for="stateList" class="col-sm-3 control-label">Select State :</label>
+								<label for="state" class="col-sm-3 control-label">Select State :</label>
 								<div class="col-sm-9">
-									<select id="stateList" name="stateList">
+									<select id="state" name="state">
 										<option value="Andhra">Andhra Pradesh</option>
 										<option value="Telangana">Telangana</option>
 									</select>
@@ -28,9 +28,9 @@
 							</div>
 
 							<div class="form-group">
-								<label for="districtList" class="col-sm-3 control-label">Select District :</label>
+								<label for="district" class="col-sm-3 control-label">Select District :</label>
 								<div class="col-sm-9">
-									<select id="" name="districtList">
+									<select id="district" name="district">
 										<c:forEach items="${districtList}" var="dist">
 											<option value="${dist}">${dist}</option>									
 										</c:forEach>
