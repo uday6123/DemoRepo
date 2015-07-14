@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
+
 import com.getmeseva.bean.ComplaintInfo;
 import com.getmeseva.bean.UserInfo;
 
@@ -24,35 +28,13 @@ public class ComplaintDBAPI {
 	 * @param mInfo
 	 * @return
 	 */
-	public boolean createComplaint(ComplaintInfo cInfo,UserInfo uInfo,MysqlDatabaseInfo mInfo){
+	public boolean createComplaint(ComplaintInfo cInfo){
 		
 	try{	
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://"+mInfo.getDbHost()+":"+mInfo.getDbPort()+"/"+mInfo.getDbName(), mInfo.getUserName(), mInfo.getPassword());
-		String query = "INSERT INTO COMPLAINTS values(?,?,?,?,?,?,?,?,?,?,?)";
-		PreparedStatement statement = con.prepareStatement(query);
-		con.setAutoCommit(false);
-		cInfo.setComplaintId("CID"+System.currentTimeMillis());
-		statement.setString(1, cInfo.getComplaintId());
-		statement.setString(2, cInfo.getDescription());
-		statement.setString(3, cInfo.getImageUrl());
-		statement.setString(4, cInfo.getState());
-		statement.setString(5, cInfo.getDistrict());
-		statement.setString(6, cInfo.getDept());
-		statement.setTimestamp(7, null);
-		statement.setString(8, cInfo.getPin());
-		statement.setString(9, cInfo.getLocation());
-		statement.setString(10, cInfo.getStatus());
-		statement.setString(11, cInfo.getRemarks());
-		statement.executeUpdate();
-		query = "INSERT INTO USERDETAILS VALUES (?,?,?,?)";
-		statement = con.prepareStatement(query);
-		statement.setString(1, cInfo.getComplaintId());
-		statement.setString(2, uInfo.getName());
-		statement.setString(3, uInfo.getMobile());
-		statement.setString(4, uInfo.getEmail());
-		statement.executeUpdate();
-		con.commit();
+		Session sess = new AnnotationConfiguration().configure().buildSessionFactory().openSession();
+		Transaction t = sess.beginTransaction();
+		sess.persist(cInfo);
+		t.commit();
 		return true;
 	}catch(Exception e){
 		e.printStackTrace();
@@ -67,7 +49,7 @@ public class ComplaintDBAPI {
 	 */
 	public Map<String,Object> getComplaintInfo(MysqlDatabaseInfo mInfo,String type,String value){
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
+		/*	Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://"+mInfo.getDbHost()+":"+mInfo.getDbPort()+"/"+mInfo.getDbName(), mInfo.getUserName(), mInfo.getPassword());
 			String query = "";
 			if("CID".equalsIgnoreCase(type)){
@@ -109,7 +91,7 @@ public class ComplaintDBAPI {
 				map.put("complaintList", compList);
 				map.put("userList", userList);
 				return map;
-			}
+			}*/
 		}catch(Exception e){
 			// ignore
 		}
