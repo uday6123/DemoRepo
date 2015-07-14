@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -85,7 +84,7 @@ public class UserController {
 	
 	@RequestMapping("/showRegisterForm.do")
 	public ModelAndView showRegisterForm(HttpServletRequest request,HttpServletResponse response){
-		List distList = new ArrayList();
+		List<String> distList = new ArrayList<String>();
 		distList.add("Srikakulam");
 		distList.add("East Godavari");
 		distList.add("West Godavari");
@@ -105,10 +104,12 @@ public class UserController {
 	public ModelAndView registerComplaint(HttpServletRequest request,HttpServletResponse response){
 		//populate all the complaintInfo and Userinfo
 				ComplaintInfo cInfo = new ComplaintInfo();
-				cInfo.setDept(request.getParameter("selectedDept"));
+				cInfo.setDept("REVENUE");
 				cInfo.setDescription(request.getParameter("req_desc"));
-				cInfo.setDistrict(request.getParameter("selectedDist"));
-				cInfo.setState(request.getParameter("selectedState"));
+				/*cInfo.setDistrict(request.getParameter("selectedDist"));
+				cInfo.setState(request.getParameter("selectedState"));*/
+				cInfo.setDistrict("SRIKAKULAM");
+				cInfo.setState("AP");
 				cInfo.setStatus("Open");
 				
 				UserInfo uInfo = new UserInfo();

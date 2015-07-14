@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
+
 
 
 
@@ -17,13 +17,13 @@ public class StoreEmp {
 		Session sess = sessFact.openSession();;
 		Transaction t = sess.beginTransaction();
 		Employee e = new Employee();
-		e.setId(2);
-		e.setFname("uday");
-		e.setLname("kiran");
+		e.setId(3);
+		e.setFname("rahul");
+		e.setLname("nall");
 		Student stud = new Student();
-		stud.setFather("potham");
-		stud.setName("pvv");
-		stud.setRollno(070210507);
+		stud.setFather("uday");
+		stud.setName("meduri");
+		stud.setRollno(728);
 		sess.persist(stud);
 		sess.persist(e);
 		t.commit();

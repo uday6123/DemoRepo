@@ -1,5 +1,6 @@
 package com.getmeseva.db;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -7,12 +8,13 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="student")
+@Table(name="Student")
 public class Student {
 
 	public Student(){}
 	
-	@Id
+	@Id 
+	@Column(name="ROLL_NUMBER")
 	public int rollno;
 	public String name;
 	public String father;
