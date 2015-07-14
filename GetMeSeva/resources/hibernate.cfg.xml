@@ -4,6 +4,7 @@
 
 <hibernate-configuration>
    <session-factory>
+   <property name="hbm2ddl.auto">update</property>
    <property name="hibernate.dialect">
       org.hibernate.dialect.MySQLDialect
    </property>
@@ -18,11 +19,16 @@
    <property name="hibernate.connection.username">
       getmeseva
    </property>
+   <property name="show_sql">true</property>
    <property name="hibernate.connection.password">getmeseva123</property>
+   
+   <mapping  class="com.getmeseva.bean.ComplaintInfo"/>
+   <mapping  class="com.getmeseva.bean.Departments"/>
+   <mapping  class="com.getmeseva.bean.District"/>
+   <mapping  class="com.getmeseva.bean.Mandal"/>
+   <mapping  class="com.getmeseva.bean.States"/>
+   <mapping  class="com.getmeseva.bean.UserInfo"/>
 
-   <!-- List of XML mapping files -->
-   <mapping class="com.getmeseva.db.Employee"/>
-	<mapping class="com.getmeseva.db.Student"/>
-		
 </session-factory>
 </hibernate-configuration>
+

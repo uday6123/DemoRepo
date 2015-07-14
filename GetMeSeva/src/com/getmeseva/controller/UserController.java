@@ -2,6 +2,7 @@ package com.getmeseva.controller;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -10,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 
 
 
@@ -70,13 +73,13 @@ public class UserController {
 			}
 		});
 		List<UserInfo> userList  = (List<UserInfo>) infoMap.get("userList");
-		Collections.sort(userList,new Comparator<UserInfo>() {
+		/*Collections.sort(userList,new Comparator<UserInfo>() {
 
 			@Override
 			public int compare(UserInfo o1,UserInfo o2) {
 				return o1.getComplaintId().compareTo(o2.getComplaintId());
 			}
-		});
+		});*/
 		request.setAttribute("complaintList", compList);
 		request.setAttribute("userList", userList);
 		return new ModelAndView("ViewComplaint");
@@ -84,7 +87,7 @@ public class UserController {
 	
 	@RequestMapping("/showRegisterForm.do")
 	public ModelAndView showRegisterForm(HttpServletRequest request,HttpServletResponse response){
-		List<String> distList = new ArrayList<String>();
+		List distList = new ArrayList();
 		distList.add("Srikakulam");
 		distList.add("East Godavari");
 		distList.add("West Godavari");
@@ -96,30 +99,29 @@ public class UserController {
 	
 	@RequestMapping("/showComplaintForm.do")
 	public ModelAndView showComplaintForm(HttpServletRequest request,HttpServletResponse response){
-		
-		return new ModelAndView("comlaintForm");
+		Map<String,String> model = new HashMap<String,String>();
+		model.put("selectedState",request.getParameter("state"));
+		model.put("dist",request.getParameter("district"));
+		model.put("dept",request.getParameter("deptList"));
+		return new ModelAndView("comlaintForm",model);
 	}
 	
 	@RequestMapping("/registerComlaint.do")
 	public ModelAndView registerComplaint(HttpServletRequest request,HttpServletResponse response){
 		//populate all the complaintInfo and Userinfo
 				ComplaintInfo cInfo = new ComplaintInfo();
-				cInfo.setDept("REVENUE");
+				/*cInfo.setDept(request.getParameter("dept"));
 				cInfo.setDescription(request.getParameter("req_desc"));
-				/*cInfo.setDistrict(request.getParameter("selectedDist"));
+				cInfo.setDistrict(request.getParameter("dist"));
 				cInfo.setState(request.getParameter("selectedState"));*/
-				cInfo.setDistrict("SRIKAKULAM");
-				cInfo.setState("AP");
 				cInfo.setStatus("Open");
 				
 				UserInfo uInfo = new UserInfo();
 				uInfo.setMobile(request.getParameter("mobile"));
 				uInfo.setEmail(request.getParameter("email"));
 				uInfo.setName(request.getParameter("name"));
-				request.setAttribute("complaintId", "CID1333");
 				ComplaintDBAPI api =new ComplaintDBAPI();
-				
-				api.createComplaint(cInfo, uInfo,populateDBInfo());
+				api.createComplaint(cInfo);
 		return new ModelAndView("complaintSuccess");
 	}
 	
