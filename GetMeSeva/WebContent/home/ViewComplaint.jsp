@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,7 +15,14 @@ tr {text-align:center;}
 </head>
 <body>
 	<H2>VIEW COMPLAINT STATUS</H2>
+	
+	<c:choose>
+	 <c:when test="${noData == true}">
+	  <H1> No Complaint found with the search criteria. Please retry.</H1>
+	 </c:when>
+	 <c:otherwise>
 
+<c:forEach items="${complaintsList}" var="complaintInfo">
 	<div>
 		<table border="1">
 			<tr>
@@ -27,15 +35,15 @@ tr {text-align:center;}
 			</tr>
 			<tr>
 				<td>State</td>
-				<td>${complaintInfo.state}</td>
+				<td>${complaintInfo.district.state.name}</td>
 			</tr>
 			<tr>
 				<td>District</td>
-				<td>${complaintInfo.district}</td>
+				<td>${complaintInfo.district.name}</td>
 			</tr>
 			<tr>
 				<td>Department</td>
-				<td>${complaintInfo.dept}</td>
+				<td>${complaintInfo.dept.name}</td>
 			</tr>
 			<tr>
 				<td>Description</td>
@@ -47,20 +55,23 @@ tr {text-align:center;}
 			</tr>
 			<tr>
 				<td>User Name</td>
-				<td>${userInfo.name}</td>
+				<td>${complaintInfo.userInfo.name}</td>
 			</tr>
 			<tr>
 				<td>Mobile Number</td>
-				<td>${userInfo.mobile}</td>
+				<td>${complaintInfo.userInfo.mobile}</td>
 			</tr>
 
 			<tr>
 				<td>Email Id</td>
-				<td>${userInfo.email}</td>
+				<td>${complaintInfo.userInfo.email}</td>
 			</tr>
 
 		</table>
 	</div>
-
+	<br/> <br/>
+</c:forEach>
+</c:otherwise>
+</c:choose>
 </body>
 </html>

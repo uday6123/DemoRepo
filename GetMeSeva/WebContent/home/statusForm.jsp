@@ -20,9 +20,9 @@
 								<label for="search_type" class="col-sm-3 control-label">Search By :</label>
 								<div class="col-sm-9">
 									<select id="search_type" name="search_type">
-										<option value="Mobile">MOBILE NUMBER</option>
-										<option value="Email">EMAIL ID</option>
-										<option value="ComplaintId">COMPLAINT ID</option>
+										<option value="mobile">MOBILE NUMBER</option>
+										<option value="email">EMAIL ID</option>
+										<option value="complaint_id">COMPLAINT ID</option>
 									</select>
 								</div>
 							</div>

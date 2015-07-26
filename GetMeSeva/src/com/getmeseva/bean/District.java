@@ -14,9 +14,11 @@ public class District {
 
 	@Id
 	private int ID;
+	
 	@Column(name="district_name")
 	private String name;
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne
 	@JoinColumn(name="state_id",referencedColumnName="ID")
 	private States state;
 	

@@ -17,7 +17,7 @@ public class Mandal {
 	@Column(name="mandal_name")
 	private String name;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="district_id",referencedColumnName="ID")
 	private District dist;
 

@@ -1,20 +1,16 @@
 package com.getmeseva.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import com.getmeseva.bean.ComplaintInfo;
-import com.getmeseva.bean.UserInfo;
+import com.getmeseva.bean.Departments;
+import com.getmeseva.bean.District;
 
 /**
  * @author uday
@@ -41,57 +37,48 @@ public class ComplaintDBAPI {
 	}
 		return false;
 	}
+	
+	
+	/**
+	 * @param state_id
+	 * @return
+	 */
+	public List<District> getDistrictList(int state_id){
+		Session sess = new AnnotationConfiguration().configure().buildSessionFactory().openSession();
+		Query query = sess.createQuery("from District where state = :id ");
+		query.setInteger("id", state_id);
+		return  (List<District>)query.list();
+	}
+	
+	/**
+	 * @return
+	 */
+	public List<Departments> getDeptList(){
+		Session sess = new AnnotationConfiguration().configure().buildSessionFactory().openSession();
+		Query query = sess.createQuery("from Departments");
+		return  (List<Departments>)query.list();
+	}
 
 	/**
 	 * @param mInfo
 	 * @param type
 	 * @param value
 	 */
-	public Map<String,Object> getComplaintInfo(MysqlDatabaseInfo mInfo,String type,String value){
+	public List<ComplaintInfo> getComplaintInfo(String type,String value){
 		try{
-		/*	Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://"+mInfo.getDbHost()+":"+mInfo.getDbPort()+"/"+mInfo.getDbName(), mInfo.getUserName(), mInfo.getPassword());
-			String query = "";
-			if("CID".equalsIgnoreCase(type)){
-			  query = "SELECT * FROM USERDETAILS UD,COMPLAINTS CMP WHERE CMP.COMPLAINT_ID = '"+value+"' AND CMP.COMPLAINT_ID = UD.COMPLAINT_ID" ;
-			}else if("MOBILE".equalsIgnoreCase("")){
-				query = "SELECT * FROM USERDETAILS UD,COMPLAINTS CMP WHERE UD.MOBILE = '"+value+"' AND CMP.COMPLAINT_ID = UD.COMPLAINT_ID";
+			Session sess = new AnnotationConfiguration().configure().buildSessionFactory().openSession();
+			String sql = "";
+			if("complaint_id".equals(type)){
+				sql = "from  ComplaintInfo where complaintId = :id";
 			}else{
-				query = "SELECT * FROM USERDETAILS UD,COMPLAINTS CMP WHERE UD.EMAIL = '"+value+"' AND CMP.COMPLAINT_ID = UD.COMPLAINT_ID";
+				sql = "select ci from ComplaintInfo ci , UserInfo ui where ui."+ type +"= :id and ci.userInfo = ui.userId";
 			}
-			PreparedStatement selectStatement = con.prepareStatement(query);
-			ResultSet rs = selectStatement.executeQuery();
-			ComplaintInfo cInfo = null;
-			UserInfo uInfo = null;
-			if(rs.isBeforeFirst()){
-				List<ComplaintInfo> compList = new ArrayList<ComplaintInfo>();
-				List<UserInfo> userList = new ArrayList<UserInfo>();
-				Map<String,Object> map = new HashMap<String,Object>();
-				while(rs.next()){
-					cInfo = new ComplaintInfo();
-					uInfo = new UserInfo();
-					cInfo.setComplaintId(rs.getString("COMPLAINT_ID"));
-					cInfo.setCreateTime(rs.getTimestamp("COMPLAINT_TIME").toString());
-					cInfo.setDept(rs.getString("DEPARTMENT"));
-					cInfo.setDescription(rs.getString("DESCRIPTION"));
-					cInfo.setDistrict(rs.getString("DISTRICT"));
-					cInfo.setImageUrl(rs.getString("IMAGE_URL"));
-					cInfo.setLocation(rs.getString("LOCATION"));
-					cInfo.setPin(rs.getString("PIN"));
-					cInfo.setRemarks(rs.getString("REMARKS"));
-					cInfo.setState(rs.getString("STATE"));
-					cInfo.setStatus(rs.getString("STATUS"));
-					compList.add(cInfo);
-					uInfo.setComplaintId(rs.getString("COMPLAINT_ID"));
-					uInfo.setMobile(rs.getString("MOBILE"));
-					uInfo.setEmail(rs.getString("EMAIL"));
-					uInfo.setName(rs.getString("NAME"));
-					userList.add(uInfo);
-				}
-				map.put("complaintList", compList);
-				map.put("userList", userList);
-				return map;
-			}*/
+			Query query = sess.createQuery(sql);
+			query.setParameter("id", value);	
+			List<ComplaintInfo> temp = (List<ComplaintInfo>)query.list();
+			if(temp != null && temp.size() >0){
+				return temp;
+			}
 		}catch(Exception e){
 			// ignore
 		}

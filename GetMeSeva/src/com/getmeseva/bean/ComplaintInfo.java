@@ -27,11 +27,11 @@ public class ComplaintInfo {
 	@Column(name="STATUS")
 	private String status;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="DISTRICT_ID",referencedColumnName="ID")
 	private District district;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="DEPARTMENT_ID",referencedColumnName="ID")
 	private Departments dept;
 	

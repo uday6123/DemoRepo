@@ -1,43 +1,27 @@
 package com.getmeseva.controller;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import com.getmeseva.bean.ComplaintInfo;
+import com.getmeseva.bean.Departments;
+import com.getmeseva.bean.District;
+import com.getmeseva.bean.JsonView;
 import com.getmeseva.bean.UserInfo;
 import com.getmeseva.db.ComplaintDBAPI;
-import com.getmeseva.db.MysqlDatabaseInfo;
 
 @Controller
 public class UserController {
 	
-	@Value("${MYSQL_DB_HOST}")
+	/*@Value("${MYSQL_DB_HOST}")
 	private String dbHost;
 	
 	@Value("${MYSQL_DB_PORT}")
@@ -50,7 +34,7 @@ public class UserController {
 	private String password;
 	
 	@Value("${MYSQL_DB_NAME}")
-	private String dbName;
+	private String dbName;*/
 	
 	
 	@RequestMapping("/showStatusForm.do")
@@ -63,37 +47,37 @@ public class UserController {
 		String searchType = request.getParameter("search_type");
 		String searchValue = request.getParameter("search_key");
 		ComplaintDBAPI dbApi = new ComplaintDBAPI();
-		Map<String, Object> infoMap = dbApi.getComplaintInfo(populateDBInfo(), searchType, searchValue);
-		List<ComplaintInfo> compList  = (List<ComplaintInfo>) infoMap.get("complaintList");
-		Collections.sort(compList,new Comparator<ComplaintInfo>() {
-
-			@Override
-			public int compare(ComplaintInfo o1,ComplaintInfo o2) {
-				return o1.getComplaintId().compareTo(o2.getComplaintId());
-			}
-		});
-		List<UserInfo> userList  = (List<UserInfo>) infoMap.get("userList");
-		/*Collections.sort(userList,new Comparator<UserInfo>() {
-
-			@Override
-			public int compare(UserInfo o1,UserInfo o2) {
-				return o1.getComplaintId().compareTo(o2.getComplaintId());
-			}
-		});*/
-		request.setAttribute("complaintList", compList);
-		request.setAttribute("userList", userList);
+		List<ComplaintInfo> complaintsList = dbApi.getComplaintInfo(searchType, searchValue);
+		if(complaintsList == null || complaintsList.size() == 0){
+			request.setAttribute("noData", true);
+		}else{
+			request.setAttribute("complaintsList",complaintsList);
+		}
 		return new ModelAndView("ViewComplaint");
 	}
 	
 	@RequestMapping("/showRegisterForm.do")
 	public ModelAndView showRegisterForm(HttpServletRequest request,HttpServletResponse response){
-		List distList = new ArrayList();
-		distList.add("Srikakulam");
-		distList.add("East Godavari");
-		distList.add("West Godavari");
-		distList.add("Visakhapatnam");
-		request.setAttribute("districtList", distList);
+		request.setAttribute("deptList", new ComplaintDBAPI().getDeptList());
 		return new ModelAndView("registerForm");
+	}
+	
+	
+	/**
+	 * @param request
+	 * @param response
+	 * @return
+	 * 
+	 * Populates districts list based on the state selected :)
+	 * Returns JSON response to UI
+	 */
+	@RequestMapping("/getDistrictList.do")
+	public ModelAndView getDistrictList(HttpServletRequest request,HttpServletResponse response){
+		String stateId = request.getParameter("state_id");
+		List<District> distList = new ComplaintDBAPI().getDistrictList(Integer.parseInt(stateId));
+		HashMap<String,Object> model = new HashMap<String,Object>();
+		model.put("result",distList);
+		return new ModelAndView(new JsonView(),model );
 	}
 	
 	
@@ -108,27 +92,31 @@ public class UserController {
 	
 	@RequestMapping("/registerComlaint.do")
 	public ModelAndView registerComplaint(HttpServletRequest request,HttpServletResponse response){
-		//populate all the complaintInfo and Userinfo
-				ComplaintInfo cInfo = new ComplaintInfo();
-				/*cInfo.setDept(request.getParameter("dept"));
-				cInfo.setDescription(request.getParameter("req_desc"));
-				cInfo.setDistrict(request.getParameter("dist"));
-				cInfo.setState(request.getParameter("selectedState"));*/
-				cInfo.setStatus("Open");
-				
-				UserInfo uInfo = new UserInfo();
-				uInfo.setMobile(request.getParameter("mobile"));
-				uInfo.setEmail(request.getParameter("email"));
-				uInfo.setName(request.getParameter("name"));
-				ComplaintDBAPI api =new ComplaintDBAPI();
-				api.createComplaint(cInfo);
+		District dist = new District();
+		dist.setID(Integer.parseInt(request.getParameter("dist")));
+		Departments dept = new Departments();
+		dept.setID(Integer.parseInt(request.getParameter("dept")));
+		UserInfo uInfo = new UserInfo();
+		uInfo.setEmail(request.getParameter("email"));
+		uInfo.setMobile(request.getParameter("mobile"));
+		uInfo.setName(request.getParameter("name"));
+		ComplaintInfo cInfo = new ComplaintInfo();
+		cInfo.setComplaintId((dept.getID()+"")+System.currentTimeMillis());
+		cInfo.setCreateTime(null);
+		cInfo.setDept(dept);
+		cInfo.setDescription(request.getParameter("req_desc").trim());
+		cInfo.setDistrict(dist);
+		cInfo.setStatus("OPEN");
+		cInfo.setUserInfo(uInfo);
+		new ComplaintDBAPI().createComplaint(cInfo);
+		request.setAttribute("complaintId", cInfo.getComplaintId());
 		return new ModelAndView("complaintSuccess");
 	}
 	
 	/**
 	 * @return
 	 */
-	private MysqlDatabaseInfo populateDBInfo(){
+/*	private MysqlDatabaseInfo populateDBInfo(){
 		MysqlDatabaseInfo mInfo  = new MysqlDatabaseInfo();
 		mInfo.setDbHost(dbHost);
 		mInfo.setDbPort(dbPort);
@@ -137,5 +125,5 @@ public class UserController {
 		mInfo.setPassword(password);
 		return mInfo;
 	}
-
+*/
 }
