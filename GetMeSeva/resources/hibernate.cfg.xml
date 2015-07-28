@@ -28,7 +28,7 @@
    <mapping  class="com.getmeseva.bean.Mandal"/>
    <mapping  class="com.getmeseva.bean.States"/>
    <mapping  class="com.getmeseva.bean.UserInfo"/>
-
+   <mapping  class="com.getmeseva.bean.Login"/>
 </session-factory>
 </hibernate-configuration>
 

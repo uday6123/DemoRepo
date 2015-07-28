@@ -1,5 +1,7 @@
 package com.getmeseva.test;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,8 +12,10 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import com.getmeseva.bean.ComplaintInfo;
 import com.getmeseva.bean.Departments;
 import com.getmeseva.bean.District;
+import com.getmeseva.bean.Login;
 import com.getmeseva.bean.States;
 import com.getmeseva.bean.UserInfo;
+import com.getmeseva.db.AdminDBApi;
 import com.getmeseva.db.ComplaintDBAPI;
 
 public class UserTest {
@@ -48,7 +52,7 @@ public class UserTest {
 		/*Query query = sess.createQuery("from  ComplaintInfo where complaintId = :id ");
 		query.setParameter("id", "41437682393385");
 		List temp = query.list();*/
-		String type ="mobile";
+		/*String type ="mobile";
 		String value = "8121594236";
 		Session sess = new AnnotationConfiguration().configure().buildSessionFactory().openSession();
 		String sql = "";
@@ -62,8 +66,19 @@ public class UserTest {
 		List<ComplaintInfo> temp = (List<ComplaintInfo>)query.list();
 		if(temp != null && temp.size() >0){
 			//return temp;
-		}
-		
+		}*/
+		Login login = new Login();
+		/*login.setUserName("sgaddala");
+		login.setPassword("omsai123");
+		login.setCreator("1");
+		login.setRole_id("1");
+		java.util.Date date= new java.util.Date();
+		java.sql.Timestamp createTime = new Timestamp(date.getTime());
+		login.setCreate_date(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(createTime));
+		new AdminDBApi().createUser(login);*/
+		login.setUserName("umedur");
+		login.setPassword("omsai123");
+		new AdminDBApi().doLogin(login);
 		System.out.println();
 		System.out.println();
 //		t.commit();
