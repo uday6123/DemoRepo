@@ -37,12 +37,12 @@ public class UserController {
 	private String dbName;*/
 	
 	
-	@RequestMapping("/showStatusForm.do")
+	@RequestMapping("/user/showStatusForm.do")
 	public ModelAndView showStatusForm(){
-		return new ModelAndView("statusForm");
+		return new ModelAndView("user/statusForm");
 	}
 	
-	@RequestMapping("/getStatus.do")
+	@RequestMapping("/user/getStatus.do")
 	public ModelAndView getComplaintStatus(HttpServletRequest request,HttpServletResponse response){
 		String searchType = request.getParameter("search_type");
 		String searchValue = request.getParameter("search_key");
@@ -53,13 +53,13 @@ public class UserController {
 		}else{
 			request.setAttribute("complaintsList",complaintsList);
 		}
-		return new ModelAndView("ViewComplaint");
+		return new ModelAndView("user/ViewComplaint");
 	}
 	
-	@RequestMapping("/showRegisterForm.do")
+	@RequestMapping("/user/showRegisterForm.do")
 	public ModelAndView showRegisterForm(HttpServletRequest request,HttpServletResponse response){
 		request.setAttribute("deptList", new ComplaintDBAPI().getDeptList());
-		return new ModelAndView("registerForm");
+		return new ModelAndView("user/registerForm");
 	}
 	
 	
@@ -71,7 +71,7 @@ public class UserController {
 	 * Populates districts list based on the state selected :)
 	 * Returns JSON response to UI
 	 */
-	@RequestMapping("/getDistrictList.do")
+	@RequestMapping("/user/getDistrictList.do")
 	public ModelAndView getDistrictList(HttpServletRequest request,HttpServletResponse response){
 		String stateId = request.getParameter("state_id");
 		List<District> distList = new ComplaintDBAPI().getDistrictList(Integer.parseInt(stateId));
@@ -81,16 +81,16 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping("/showComplaintForm.do")
+	@RequestMapping("/user/showComplaintForm.do")
 	public ModelAndView showComplaintForm(HttpServletRequest request,HttpServletResponse response){
 		Map<String,String> model = new HashMap<String,String>();
 		model.put("selectedState",request.getParameter("state"));
 		model.put("dist",request.getParameter("district"));
 		model.put("dept",request.getParameter("deptList"));
-		return new ModelAndView("comlaintForm",model);
+		return new ModelAndView("user/comlaintForm",model);
 	}
 	
-	@RequestMapping("/registerComlaint.do")
+	@RequestMapping("/user/registerComlaint.do")
 	public ModelAndView registerComplaint(HttpServletRequest request,HttpServletResponse response){
 		District dist = new District();
 		dist.setID(Integer.parseInt(request.getParameter("dist")));
@@ -110,7 +110,7 @@ public class UserController {
 		cInfo.setUserInfo(uInfo);
 		new ComplaintDBAPI().createComplaint(cInfo);
 		request.setAttribute("complaintId", cInfo.getComplaintId());
-		return new ModelAndView("complaintSuccess");
+		return new ModelAndView("user/complaintSuccess");
 	}
 	
 	/**

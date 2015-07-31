@@ -14,7 +14,7 @@
 <span stlye="padding-left:125px;"><H2> GET COMPLAINT STATUS</H2> </span>
 <br/>
 
-		<form class="form-horizontal" role="form" method="post" action="/GetMeSeva/registerComlaint.do">
+		<form class="form-horizontal" role="form" method="post" action="/GetMeSeva/user/registerComlaint.do">
 							
 							<div class="form-group">
 								<label for="name" class="col-sm-3 control-label">Name :</label>

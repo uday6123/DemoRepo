@@ -7,27 +7,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.getmeseva.bean.Login;
+import com.getmeseva.db.AdminDBApi;
 
 @Controller
 public class AdminLoginController {
 	
-	@RequestMapping("/login.do")
+	@RequestMapping("/adminlogin/login.do")
 	public ModelAndView showAgentLogin(){
-		return new ModelAndView("login");
+		return new ModelAndView("adminlogin/login");
 	}
 	
 	
-	@RequestMapping("/dologin.do")
+	@RequestMapping("/adminlogin/doLogin.do")
 	public ModelAndView doLogin(HttpServletRequest request,HttpServletResponse response){
-		if(!"POST".equalsIgnoreCase(request.getMethod())){
-			request.setAttribute("loginError", true);
-			return new ModelAndView("login");
+		Boolean isValidSession = (Boolean)request.getSession().getAttribute("isValidSession");
+		if(isValidSession){
+			return new ModelAndView("adminlogin/index");
 		}
-		
-		return new ModelAndView("requestsView");
+		request.setAttribute("loginError", true);
+		return new ModelAndView("adminlogin/login");
 	}
 
-	@RequestMapping("/createUser.do")
+	@RequestMapping("/adminlogin/createUser.do")
 	public ModelAndView createUser(HttpServletRequest request,HttpServletResponse response){
 		return null;
 		
