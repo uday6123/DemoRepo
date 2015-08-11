@@ -15,7 +15,7 @@
 <span stlye="padding-left:125px;"><H2> GET COMPLAINT STATUS</H2> </span>
 <br/>
 
-<form class="form-horizontal" role="form" method="post" action="/GetMeSeva/user/getStatus.do">
+<form class="form-horizontal" role="form" method="post" action="/GetMeSeva/agent/getStatus.do">
 							
 							<div class="form-group">
 								<label for="search_type" class="col-sm-3 control-label">Search By :</label>

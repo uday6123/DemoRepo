@@ -18,5 +18,7 @@ tr {text-align:center;}
 
 <H2>Please note your complaint id for further status :  ${complaintId}</H2>
 
+<H3> <a href="/GetMeSeva/agent/showRegisterForm.do">CLICK HERE TO REGISTER A NEW COMPLAINT</a></H3>
+
 </body>
 </html>

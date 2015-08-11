@@ -5,9 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Get Status</title>
-<link href="/GetMeSeva/css/bootstrap.min.css"
+<script src="/GetMeSeva/home/js/jquery.js"></script>
+<link href="/GetMeSeva/home/css/bootstrap.min.css"
 	rel="stylesheet">
-<script src="/GetMeSeva/js/bootstrap.min.js"></script>
+<script src="/GetMeSeva/home/js/bootstrap.min.js"></script>
 <script>
 $(function() {
 
@@ -150,7 +151,7 @@ body {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="/GetMeSeva/adminlogin/doLogin.do" method="post" role="form" style="display: block;">
+								<form id="login-form" action="/GetMeSeva/agent/doLogin.do" method="post" role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>
@@ -169,7 +170,7 @@ body {
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+													<a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
 												</div>
 											</div>
 										</div>

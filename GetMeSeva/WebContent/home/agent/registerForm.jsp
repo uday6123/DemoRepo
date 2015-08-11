@@ -49,7 +49,7 @@ function getDistrictList(){
 <span stlye="padding-left:125px;"><H2> Register a Request/Complaint</H2> </span>
 <br/>
 
-<form class="form-horizontal" role="form" method="post" action="/GetMeSeva/user/showComplaintForm.do">
+<form class="form-horizontal" role="form" method="post" action="/GetMeSeva/agent/showComplaintForm.do">
 							
 							<div class="form-group">
 								<label for="state" class="col-sm-3 control-label">Select State :</label>

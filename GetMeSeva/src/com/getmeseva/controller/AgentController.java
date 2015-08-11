@@ -11,25 +11,30 @@ import com.getmeseva.bean.Login;
 import com.getmeseva.db.AdminDBApi;
 
 @Controller
-public class AdminLoginController {
+public class AgentController {
 	
-	@RequestMapping("/adminlogin/login.do")
-	public ModelAndView showAgentLogin(){
-		return new ModelAndView("adminlogin/login");
+	@RequestMapping("/agent/login.do")
+	public ModelAndView showAgentLogin(HttpServletRequest request,HttpServletResponse response){
+		Boolean isLoggedIn = (Boolean) request.getSession().getAttribute("isValidSession");
+		if(isLoggedIn == null ||  !isLoggedIn){
+			return new ModelAndView("agent/login");
+		}else{
+			return new ModelAndView("agent/index");
+		}
 	}
 	
 	
-	@RequestMapping("/adminlogin/doLogin.do")
+	@RequestMapping("/agent/doLogin.do")
 	public ModelAndView doLogin(HttpServletRequest request,HttpServletResponse response){
 		Boolean isValidSession = (Boolean)request.getSession().getAttribute("isValidSession");
 		if(isValidSession){
-			return new ModelAndView("adminlogin/index");
+			return new ModelAndView("agent/index");
 		}
 		request.setAttribute("loginError", true);
-		return new ModelAndView("adminlogin/login");
+		return new ModelAndView("agent/login");
 	}
 
-	@RequestMapping("/adminlogin/createUser.do")
+	@RequestMapping("/agent/createUser.do")
 	public ModelAndView createUser(HttpServletRequest request,HttpServletResponse response){
 		return null;
 		
